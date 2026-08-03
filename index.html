@@ -53,7 +53,7 @@ header{display:flex;justify-content:space-between;align-items:center;padding:10p
 /* ── 보드 ── */
 #board{
   flex:1;display:flex;flex-wrap:wrap;align-content:center;justify-content:center;
-  gap:18px 12px;padding:10px 8px 14px;overflow-y:auto;
+  gap:16px 10px;padding:8px 8px 12px;overflow-y:auto;
 }
 .basket{position:relative;cursor:pointer;flex:none;transition:transform .12s}
 .basket.sel{transform:translateY(-4px)}
@@ -161,7 +161,8 @@ footer{flex:none;display:flex;gap:10px;justify-content:center;padding:6px 16px c
   <div class="title-bottom">
     <div class="title-sub">같은 색 고양이를 모아 포근하게 재워 주세요</div>
     <button id="btnStart">재우러 가기 🐾</button>
-    <div class="title-ver">v0.5.1 · INTERNAL BUILD</div>
+    <div class="ios-hint" id="iosHint" style="display:none;margin-top:12px;font-size:12px;line-height:1.6;color:#FFF3E2;background:rgba(90,70,54,.45);border-radius:12px;padding:9px 12px;">📲 앱으로 설치: Safari 하단 <b>공유(⬆️)</b> → <b>'홈 화면에 추가'</b></div>
+    <div class="title-ver">v0.5.2 · INTERNAL BUILD</div>
   </div>
 </div>
 
@@ -397,8 +398,9 @@ const board=$('board');
 function catWidth(){
   const n=caps.length;
   const vw=Math.min(window.innerWidth,560);
-  const base = n<=5 ? 70 : (n<=7 ? 63 : 56);
-  return Math.min(base, Math.floor((vw-28)/4.23));
+  const base = n<=5 ? 64 : (n<=7 ? 58 : 52);
+  const twoPerRow = Math.floor((vw-38)/(2*3.31));  // 정원3 바구니 2개가 한 줄에 들어가는 폭
+  return Math.max(40, Math.min(base, twoPerRow));
 }
 function geoFor(cap,cw){
   const bw=Math.round(cw*(cap*0.92+0.55));
@@ -649,6 +651,11 @@ $('btnStuckRestart').onclick=()=>{$('ovStuck').classList.remove('show');loadLeve
 $('btnSound').onclick=function(){soundOn=!soundOn;$('sndIcon').src=soundOn?ASSETS.ui.sound_on:ASSETS.ui.sound_off};
 window.addEventListener('resize',()=>{render(); if(tutMoves&&tutStep<tutMoves.length)fingerOn(tutMoves[tutStep][0])});
 
+(function(){
+  const isIOS=/iPhone|iPad|iPod/.test(navigator.userAgent);
+  const standalone=(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||navigator.standalone;
+  if(isIOS&&!standalone){const h=document.getElementById('iosHint');if(h)h.style.display='block'}
+})();
 document.getElementById('btnStart').addEventListener('click',()=>{
   const t=document.getElementById('titleScreen');
   t.classList.add('hide');

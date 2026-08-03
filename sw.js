@@ -1,4 +1,4 @@
-const CACHE='catnap-v06';
+const CACHE='catnap-v07';
 const FILES=["./", "./index.html", "./manifest.json", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png", "./cat_orange_idle.png", "./cat_orange_sleep.png", "./cat_gray_idle.png", "./cat_gray_sleep.png", "./cat_brown_idle.png", "./cat_brown_sleep.png", "./cat_black_idle.png", "./cat_black_sleep.png", "./cat_pink_idle.png", "./cat_pink_sleep.png", "./cat_cream_idle.png", "./cat_cream_sleep.png", "./cat_mint_idle.png", "./cat_mint_sleep.png", "./basket_2_back.png", "./basket_2_front.png", "./basket_3_back.png", "./basket_3_front.png", "./basket_4_back.png", "./basket_4_front.png", "./ui_undo.png", "./ui_hint.png", "./ui_restart.png", "./ui_sound_on.png", "./ui_sound_off.png", "./ui_clear.png", "./bg_main.jpg", "./bg_terrace.jpg", "./bg_night.jpg", "./marketing_keyart.jpg"];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
