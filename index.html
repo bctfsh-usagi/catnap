@@ -147,7 +147,7 @@ footer{flex:none;display:flex;gap:10px;justify-content:center;padding:6px 16px c
   <div class="title-bottom">
     <div class="title-sub">같은 색 고양이를 모아 포근하게 재워 주세요</div>
     <button id="btnStart">재우러 가기 🐾</button>
-    <div class="title-ver">v0.4.1 · INTERNAL (안정판)</div>
+    <div class="title-ver">v0.4.2 · INTERNAL (저장 지원)</div>
   </div>
 </div>
 
@@ -318,6 +318,9 @@ const sfx={
 };
 
 let level=1, stacks=[], caps=[], par=0;
+const SAVE_KEY='catnap_save_v1';
+function saveProgress(){try{localStorage.setItem(SAVE_KEY,JSON.stringify({level,soundOn}))}catch(e){}}
+function loadProgress(){try{const d=JSON.parse(localStorage.getItem(SAVE_KEY));if(d&&d.level>=1)return d}catch(e){}return null}
 let selected=-1, moves=0, history=[], hintTimer=null;
 let tutMoves=null, tutStep=0, tipShown=false;
 
@@ -340,6 +343,7 @@ function loadLevel(lv){
   const g=generateLevel(lv);
   stacks=g.stacks;caps=g.caps;par=g.par;
   selected=-1;moves=0;history=[];tipShown=false;
+  saveProgress();
   $('lvNum').textContent=lv;
   $('moveCount').textContent='0';
   $('tut').innerHTML= lv===1
@@ -547,9 +551,15 @@ document.getElementById('btnStart').addEventListener('click',()=>{
 $('btnNext').onclick=()=>{$('ovWin').classList.remove('show');level++;loadLevel(level)};
 $('btnStuckUndo').onclick=()=>{$('ovStuck').classList.remove('show');undo()};
 $('btnStuckRestart').onclick=()=>{$('ovStuck').classList.remove('show');loadLevel(level)};
-$('btnSound').onclick=function(){soundOn=!soundOn;$('sndIcon').src=soundOn?A.icon_sound_on:A.icon_sound_off};
+$('btnSound').onclick=function(){soundOn=!soundOn;$('sndIcon').src=soundOn?A.icon_sound_on:A.icon_sound_off;saveProgress()};
 window.addEventListener('resize',()=>{render(); if(tutMoves&&tutStep<tutMoves.length)fingerOn(tutMoves[tutStep][0])});
 
+const _saved=loadProgress();
+if(_saved){
+  level=_saved.level;
+  if(_saved.soundOn===false){soundOn=false;const si=$('sndIcon');if(si)si.src=A.icon_sound_off;}
+  if(level>1){const bs=document.getElementById('btnStart');if(bs)bs.textContent='LEVEL '+level+' 이어하기 🐾';}
+}
 loadLevel(level);
 </script>
 </body>
