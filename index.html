@@ -44,7 +44,7 @@ header{display:flex;justify-content:space-between;align-items:center;padding:12p
 
 #board{
   flex:1;display:flex;flex-wrap:wrap;align-content:center;justify-content:center;
-  gap:22px 14px;padding:12px 8px 18px;overflow-y:auto;
+  gap:16px 10px;padding:10px 8px 14px;overflow-y:auto;
 }
 .basket{position:relative;cursor:pointer;flex:none;transition:transform .12s}
 .basket.sel{transform:translateY(-4px)}
@@ -147,7 +147,7 @@ footer{flex:none;display:flex;gap:10px;justify-content:center;padding:6px 16px c
   <div class="title-bottom">
     <div class="title-sub">같은 색 고양이를 모아 포근하게 재워 주세요</div>
     <button id="btnStart">재우러 가기 🐾</button>
-    <div class="title-ver">PROTOTYPE v0.4 · INTERNAL</div>
+    <div class="title-ver">v0.4.1 · INTERNAL (안정판)</div>
   </div>
 </div>
 
@@ -330,8 +330,9 @@ const board=$('board');
 function catWidth(){
   const n=caps.length;
   const vw=Math.min(window.innerWidth, 560);
-  const base = n<=5 ? 62 : (n<=7 ? 56 : 50);
-  return Math.min(base, Math.floor(vw/ (4*0.92+0.9)));
+  const base = n<=5 ? 58 : (n<=7 ? 54 : 48);
+  const twoPerRow = Math.floor((vw-38)/(2*3.31));  // 정원3 바구니 2개/행 보장
+  return Math.max(40, Math.min(base, twoPerRow));
 }
 function basketW(cap,cw){ return Math.round(cw*(cap*0.92+0.55)); }
 
