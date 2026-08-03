@@ -161,7 +161,7 @@ footer{flex:none;display:flex;gap:10px;justify-content:center;padding:6px 16px c
   <div class="title-bottom">
     <div class="title-sub">같은 색 고양이를 모아 포근하게 재워 주세요</div>
     <button id="btnStart">재우러 가기 🐾</button>
-    <div class="title-ver">v0.5 · INTERNAL BUILD</div>
+    <div class="title-ver">v0.5.1 · INTERNAL BUILD</div>
   </div>
 </div>
 
@@ -219,16 +219,16 @@ footer{flex:none;display:flex;gap:10px;justify-content:center;padding:6px 16px c
 /* ── ASSET MAP (상대경로) ── */
 const ASSETS={
   cats:{}, baskets:{}, ui:{}, backgrounds:{
-    main:'./assets/backgrounds/bg_main.jpg',
-    terrace:'./assets/backgrounds/bg_terrace.jpg',
-    night:'./assets/backgrounds/bg_night.jpg'
+    main:'./bg_main.jpg',
+    terrace:'./bg_terrace.jpg',
+    night:'./bg_night.jpg'
   },
-  marketing:{keyart:'./assets/marketing/marketing_keyart.jpg'}
+  marketing:{keyart:'./marketing_keyart.jpg'}
 };
 const COLORS=['orange','gray','brown','black','pink','cream','mint'];
-COLORS.forEach(c=>{ASSETS.cats[c]={idle:`./assets/cats/cat_${c}_idle.png`,sleep:`./assets/cats/cat_${c}_sleep.png`}});
-[2,3,4].forEach(n=>{ASSETS.baskets[n]={back:`./assets/baskets/basket_${n}_back.png`,front:`./assets/baskets/basket_${n}_front.png`}});
-['undo','hint','restart','sound_on','sound_off','clear'].forEach(n=>{ASSETS.ui[n]=`./assets/ui/ui_${n}.png`});
+COLORS.forEach(c=>{ASSETS.cats[c]={idle:`./cat_${c}_idle.png`,sleep:`./cat_${c}_sleep.png`}});
+[2,3,4].forEach(n=>{ASSETS.baskets[n]={back:`./basket_${n}_back.png`,front:`./basket_${n}_front.png`}});
+['undo','hint','restart','sound_on','sound_off','clear'].forEach(n=>{ASSETS.ui[n]=`./ui_${n}.png`});
 
 /* ── 렌더 상수 (실측 기반) ── */
 const SLOTS={2:[0.305,0.688],3:[0.216,0.492,0.774],4:[0.166,0.383,0.606,0.826]}; // 방석 중심 실측값
