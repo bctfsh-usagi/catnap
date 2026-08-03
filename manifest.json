@@ -1,0 +1,25 @@
+{
+  "name": "캣냅 정렬 — Cat Nap Sort",
+  "short_name": "캣냅 정렬",
+  "description": "같은 색 고양이를 모아 포근하게 재워 주세요",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FDF3E3",
+  "theme_color": "#F6E9DC",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
